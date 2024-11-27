@@ -1,30 +1,24 @@
-import { apiInitializer } from "discourse/lib/api";
-import discourseComputed, { on } from "discourse-common/utils/decorators";
-import { set } from "@ember/object"; // <-- Import set function here
+import EmberObject, { set}  from "@ember/object"; // Import EmberObject here
 import { dasherize } from "@ember/string";
-import EmberObject from "@ember/object"; // Import EmberObject here
-import UserCardContents from "discourse/components/user-card-contents";
 import { isEmpty } from "@ember/utils";
+import { apiInitializer } from "discourse/lib/api";
+import discourseComputed from "discourse-common/utils/decorators";
 
-export default apiInitializer("1.8.0", ( api ) => {
-  console.log("hello world from api initializer!");
-
+export default apiInitializer("1.8.0", (api) => {
+  const userFieldId = 8;
+  const userFieldVal = "Bronze";
 
   api.modifyClass("component:user-card-contents", {
     pluginId: "discourse-default-user-custom-fields",
     @discourseComputed("user.user_fields.@each.value")
     publicUserFields() {
       // Custom logic here
-      console.log("hello world from publicUserFields in my theme component!");
       const siteUserFields = this.site.get("user_fields");
       if (!isEmpty(siteUserFields)) {
-        console.log("got site user fields!", siteUserFields);
         const userFields = this.get("user.user_fields");
-        // if [userfields[1] is null make it a default strring
-        if (userFields[1] == null) {
-          userFields[1] = "I am not important";
+        if (userFields[userFieldId] == null) {
+          userFields[userFieldId] = userFieldVal
         }
-        console.log("got user fields!", userFields);
         return siteUserFields
           .filterBy("show_on_user_card", true)
           .sortBy("position")
@@ -35,24 +29,22 @@ export default apiInitializer("1.8.0", ( api ) => {
           })
           .compact();
       }
-    }
-  });  
+    },
+  });
 
-// Modify User controller
+  // Modify User controller
   api.modifyClass("controller:user", {
     pluginId: "discourse-default-user-custom-fields",
 
     @discourseComputed("model.user_fields.@each.value")
     publicUserFields() {
-      console.log("Overriding publicUserFields in User controller...");
       const siteUserFields = this.site.get("user_fields");
 
       if (!isEmpty(siteUserFields)) {
         const userFields = this.get("model.user_fields");
-        if (userFields[1] == null) {
-          userFields[1] = "I am not important";
+        if (userFields[userFieldId] == null) {
+          userFields[userFieldId] =  userFieldVal;
         }
-        console.log("got user fields!", userFields);
         return siteUserFields
           .filterBy("show_on_profile", true)
           .sortBy("position")
@@ -66,5 +58,5 @@ export default apiInitializer("1.8.0", ( api ) => {
           .compact();
       }
     },
-  });  
+  });
 });
