@@ -5,8 +5,8 @@ import { apiInitializer } from "discourse/lib/api";
 import discourseComputed from "discourse-common/utils/decorators";
 
 export default apiInitializer("1.8.0", (api) => {
-  const userFieldId = 8;
-  const userFieldVal = "Associate";
+  const userFieldId = 1;
+  const userFieldVal = "default value";
 
   api.modifyClass("component:user-card-contents", {
     pluginId: "discourse-default-user-custom-fields",
