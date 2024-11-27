@@ -1,4 +1,4 @@
-import EmberObject, { set}  from "@ember/object"; // Import EmberObject here
+import EmberObject, { set } from "@ember/object"; // Import EmberObject here
 import { dasherize } from "@ember/string";
 import { isEmpty } from "@ember/utils";
 import { apiInitializer } from "discourse/lib/api";
@@ -17,7 +17,7 @@ export default apiInitializer("1.8.0", (api) => {
       if (!isEmpty(siteUserFields)) {
         const userFields = this.get("user.user_fields");
         if (userFields[userFieldId] == null) {
-          userFields[userFieldId] = userFieldVal
+          userFields[userFieldId] = userFieldVal;
         }
         return siteUserFields
           .filterBy("show_on_user_card", true)
@@ -43,7 +43,7 @@ export default apiInitializer("1.8.0", (api) => {
       if (!isEmpty(siteUserFields)) {
         const userFields = this.get("model.user_fields");
         if (userFields[userFieldId] == null) {
-          userFields[userFieldId] =  userFieldVal;
+          userFields[userFieldId] = userFieldVal;
         }
         return siteUserFields
           .filterBy("show_on_profile", true)
