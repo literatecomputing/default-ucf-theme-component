@@ -6,7 +6,7 @@ import discourseComputed from "discourse-common/utils/decorators";
 
 export default apiInitializer("1.8.0", (api) => {
   const userFieldId = 8;
-  const userFieldVal = "Bronze";
+  const userFieldVal = "Associate";
 
   api.modifyClass("component:user-card-contents", {
     pluginId: "discourse-default-user-custom-fields",
