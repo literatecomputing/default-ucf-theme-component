@@ -1,5 +1,9 @@
 # Default User Custom Field Value
 
+> **Note:** The `greyarrows` branch carries site-specific customizations
+> (`userFieldId = 8`, value `"Bronze"`). Any future changes made on `main`
+> must also be merged into `greyarrows`.
+
 **Make a User Custom Field have a default value (proof of concept) **
 
 This sets user_custom_field_1 to "I am not important" if it is null.
