@@ -1,8 +1,7 @@
-import EmberObject, { set } from "@ember/object"; // Import EmberObject here
+import EmberObject, { computed, set } from "@ember/object"; // Import EmberObject here
 import { dasherize } from "@ember/string";
 import { isEmpty } from "@ember/utils";
 import { apiInitializer } from "discourse/lib/api";
-import discourseComputed from "discourse/lib/decorators";
 
 export default apiInitializer((api) => {
   const userFieldId = 1;
@@ -10,8 +9,7 @@ export default apiInitializer((api) => {
 
   api.modifyClass("component:user-card-contents", {
     pluginId: "discourse-default-user-custom-fields",
-    @discourseComputed("user.user_fields.@each.value")
-    publicUserFields() {
+    publicUserFields: computed("user.user_fields.@each.value", function () {
       // Custom logic here
       const siteUserFields = this.site.get("user_fields");
       if (!isEmpty(siteUserFields)) {
@@ -29,15 +27,14 @@ export default apiInitializer((api) => {
           })
           .compact();
       }
-    },
+    }),
   });
 
   // Modify User controller
   api.modifyClass("controller:user", {
     pluginId: "discourse-default-user-custom-fields",
 
-    @discourseComputed("model.user_fields.@each.value")
-    publicUserFields() {
+    publicUserFields: computed("model.user_fields.@each.value", function () {
       const siteUserFields = this.site.get("user_fields");
 
       if (!isEmpty(siteUserFields)) {
@@ -57,6 +54,6 @@ export default apiInitializer((api) => {
           })
           .compact();
       }
-    },
+    }),
   });
 });
