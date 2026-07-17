@@ -2,9 +2,9 @@ import EmberObject, { set } from "@ember/object"; // Import EmberObject here
 import { dasherize } from "@ember/string";
 import { isEmpty } from "@ember/utils";
 import { apiInitializer } from "discourse/lib/api";
-import discourseComputed from "discourse-common/utils/decorators";
+import discourseComputed from "discourse/lib/decorators";
 
-export default apiInitializer("1.8.0", (api) => {
+export default apiInitializer((api) => {
   const userFieldId = 1;
   const userFieldVal = "default value";
 
