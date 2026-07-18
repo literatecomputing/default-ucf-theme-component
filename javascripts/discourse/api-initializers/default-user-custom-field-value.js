@@ -18,14 +18,14 @@ export default apiInitializer((api) => {
           userFields[userFieldId] = userFieldVal;
         }
         return siteUserFields
-          .filterBy("show_on_user_card", true)
-          .sortBy("position")
+          .filter((field) => field.get("show_on_user_card"))
+          .sort((a, b) => a.get("position") - b.get("position"))
           .map((field) => {
             set(field, "dasherized_name", dasherize(field.get("name")));
             const value = userFields ? userFields[field.get("id")] : null;
             return isEmpty(value) ? null : EmberObject.create({ value, field });
           })
-          .compact();
+          .filter(Boolean);
       }
     }),
   });
@@ -43,8 +43,8 @@ export default apiInitializer((api) => {
           userFields[userFieldId] = userFieldVal;
         }
         return siteUserFields
-          .filterBy("show_on_profile", true)
-          .sortBy("position")
+          .filter((field) => field.get("show_on_profile"))
+          .sort((a, b) => a.get("position") - b.get("position"))
           .map((field) => {
             set(field, "dasherized_name", dasherize(field.get("name")));
             const value = userFields
@@ -52,7 +52,7 @@ export default apiInitializer((api) => {
               : null;
             return isEmpty(value) ? null : EmberObject.create({ value, field });
           })
-          .compact();
+          .filter(Boolean);
       }
     }),
   });
