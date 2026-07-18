@@ -1,10 +1,9 @@
-name: Discourse Theme
+name: Greyarrows CI
 
 on:
   push:
     branches:
-      - main
-  pull_request:
+      - greyarrows
 
 jobs:
   ci:
