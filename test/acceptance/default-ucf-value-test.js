@@ -7,8 +7,7 @@ import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 acceptance("Default User Custom Field Value", function (needs) {
   needs.user();
 
-  // ponytail: ids 1 and 8 cover both branches' userFieldId (main uses 1,
-  // greyarrows uses 8), so this file merges between branches without edits
+  // ids 1 and 8 cover the setting's default and a typical customized value
   needs.site({
     user_fields: [
       {
