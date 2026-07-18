@@ -34,7 +34,8 @@ acceptance("Default User Custom Field Value", function (needs) {
     server.get("/u/charlie/card.json", () => helper.response(cardResponse));
 
     const profileResponse = cloneJSON(userFixtures["/u/eviltrout.json"]);
-    profileResponse.user.user_fields = {};
+    // null, not {} — users who never filled in any field serialize this way
+    profileResponse.user.user_fields = null;
     server.get("/u/eviltrout.json", () => helper.response(profileResponse));
   });
 
