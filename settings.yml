@@ -1,0 +1,6 @@
+user_field_id:
+  type: integer
+  default: 1
+default_field_value:
+  type: string
+  default: "default value"

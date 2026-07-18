@@ -1,3 +1,6 @@
 en:
   theme_metadata:
     description: Set default value for user custom field(s)
+    settings:
+      user_field_id: The numeric id of the user custom field to fill in
+      default_field_value: The value shown when the user has not set the field

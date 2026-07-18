@@ -4,8 +4,8 @@ import { isEmpty } from "@ember/utils";
 import { apiInitializer } from "discourse/lib/api";
 
 export default apiInitializer((api) => {
-  const userFieldId = 1;
-  const userFieldVal = "default value";
+  const userFieldId = settings.user_field_id;
+  const userFieldVal = settings.default_field_value;
 
   api.modifyClass("component:user-card-contents", {
     pluginId: "discourse-default-user-custom-fields",
