@@ -1,12 +1,13 @@
-name: Sync d-compat
+name: Create new d-compat branch
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"
-  push:
-    branches:
-      - main
+    - cron: "0 0 * * *"
+
+permissions:
+  contents: write
+
 jobs:
   ci:
     uses: discourse/.github/.github/workflows/create-d-compat-branch.yml@v1
